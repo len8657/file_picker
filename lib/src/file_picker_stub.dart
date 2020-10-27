@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'file_picker.dart';
+import '../file_picker.dart';
 
-void registerWith(var registrar) {
+void registerPickerWith(var registrar) {
   throw UnimplementedError('Unsupported Platform for file_picker');
 }
 

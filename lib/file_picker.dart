@@ -1,14 +1,77 @@
+library file_picker;
 
-import 'dart:async';
-
-import 'package:flutter/services.dart';
+import 'dart:typed_data';
+import 'package:flutter/cupertino.dart';
+// import 'package:flutter_web_plugins/flutter_web_plugins.dart';
+// import 'file_picker_stub.dart'
+import './src/file_picker_stub.dart'
+// ignore: uri_does_not_exist
+    if (dart.library.html) './src/file_picker_web.dart'
+//ignore: uri_does_not_exist
+    if (dart.library.io) './src/file_picker_io.dart';
 
 class FilePicker {
-  static const MethodChannel _channel =
-      const MethodChannel('file_picker');
 
-  static Future<String> get platformVersion async {
-    final String version = await _channel.invokeMethod('getPlatformVersion');
-    return version;
+
+  factory FilePicker() => _getInstance();
+  static FilePicker get instance => _getInstance();
+  static FilePicker _instance;
+  FilePicker._internal() {
+    // 初始化
+  }
+  static FilePicker _getInstance() {
+    if (_instance == null) {
+      _instance = new FilePicker._internal();
+    }
+    return _instance;
+  }
+
+  static void registerWith(var registrar) {
+    return registerPickerWith(registrar);
+  }
+
+  Future<dynamic> getImageFile({@required ImageType outputType}) async {
+    return getImage(outputType: outputType);
+  }
+
+  Future<MediaInfo> get imageFileInfo async {
+    // return getImageInfo;
+    return getImageInfo;
+  }
+
+  Future<dynamic> getVideoFile({@required VideoType outputType}) async {
+    return getVideo(outputType: outputType);
+  }
+
+  Future<MediaInfo> get getVideoFileInfo async {
+    return getVideoInfo;
+  }
+
+  Future<dynamic> getExcelFile({@required ExcelType outputType}) async {
+    return getExcel(outputType: outputType);
+  }
+
+  Future<MediaInfo> get getExcelFileInfo async {
+    return getExcelInfo;
+  }
+
+  Future<bool> saveFile({@required var data, @required name}) async {
+    return inputFile(data: data, name: name);
   }
 }
+
+/// Supported file types
+enum FileTypeCross { image, video, audio, any, custom }
+
+class MediaInfo {
+  String fileName;
+  String base64;
+  String base64WithScheme;
+  Uint8List data;
+}
+
+enum ImageType { file, bytes, widget }
+
+enum VideoType { file, bytes }
+
+enum ExcelType { file, bytes }

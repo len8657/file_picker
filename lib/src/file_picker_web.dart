@@ -7,10 +7,10 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
 import 'web_picker.dart';
-import 'file_picker.dart';
+import '../file_picker.dart';
 
 
-void registerWith(Registrar registrar) {
+void registerPickerWith(Registrar registrar) {
   final channel = MethodChannel(
       'file_picker', const StandardMethodCodec(), registrar.messenger);
   final instance = WebPicker();

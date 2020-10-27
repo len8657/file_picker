@@ -35,8 +35,8 @@ flutter:
       ios:
         pluginClass: FilePickerPlugin
       web:
-        pluginClass: FilePickerWeb
-        fileName: file_picker_web.dart
+        pluginClass: FilePicker
+        fileName: file_picker.dart
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:
