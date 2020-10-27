@@ -120,9 +120,9 @@ Future<dynamic> getExcel({@required ExcelType outputType}) async {
       return await _pickFile('.xlsx,.xls');
       break;
     case ExcelType.bytes:
-      // final data =
-          // await _methodChannel.invokeMapMethod<String, dynamic>('pickExcel');
-        final data = await WebPicker().pickExcel();
+      final data =
+          await _methodChannel.invokeMapMethod<String, dynamic>('pickExcel');
+        // final data = await WebPicker().pickExcel();
         final excelData = base64.decode(data['data']);
         return excelData;
       break;
